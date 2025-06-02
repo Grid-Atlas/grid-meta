@@ -8,16 +8,14 @@ on:
     branches:
       - '**'
 
-env:
-  PYTHON_VERSION: "3.11"
-
 jobs:
   test_and_lint:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        python-version: [${{ env.PYTHON_VERSION }}]
+        python-version: ["3.11", "3.12", "3.13"]
+        os: [ubuntu-latest, windows-latest]
 
     steps:
       - name: Checkout code

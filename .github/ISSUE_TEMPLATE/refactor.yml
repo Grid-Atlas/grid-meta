@@ -19,8 +19,8 @@ body:
         Example:
         - Module: `gridmeta.core.model`
         - Function: `evaluate_energy_model()`
-      validations:
-        required: true
+    validations:
+      required: true
 
   - type: textarea
     id: problem
