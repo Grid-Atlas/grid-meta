@@ -21,8 +21,8 @@ body:
         - Function: `gridmeta.load_config()`
         - File: `docs/usage.md`
         - Section: "Loading Configurations"
-      validations:
-        required: true
+    validations:
+      required: true
 
   - type: textarea
     id: issue
