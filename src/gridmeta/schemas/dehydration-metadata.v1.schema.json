@@ -1,0 +1,715 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Distribution System Dehydrated Dataset",
+    "description": "Data representation after obfuscating distribution system model.",
+    "type": "object",
+    "properties": {
+        "metadata": {
+            "title": "Metadata",
+            "description": "Contains information about location, creation date and model year.",
+            "type": "object",
+            "properties": {
+                "state": {
+                    "title": "List U.S state to which model belongs to.",
+                    "description": "U.S State to which model belongs to.",
+                    "anyOf": [
+                        {"type": "string"},
+                        {"type": "array", "items": {"type": "string"}, "minItems": 1}
+                    ]
+                },
+                "created_at": {
+                    "title": "Created Datetime",
+                    "description": "Data obfuscation date-time.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "model_year": {
+                    "title": "Model Year",
+                    "description": "Model year from which data is extracted.",
+                    "type": "integer",
+                    "pattern": "^(19|20|21)\\d{2}$"
+                },
+                "info": {
+                    "title": "Metdata Info",
+                    "description": "Any description you would like to add.",
+                    "type": "string"
+                },
+                "region_type": {
+                    "title": "Feeder Category",
+                    "description": "An enumeration of feeder categories representing it's area type.",
+                    "type": "string",
+                    "enum": ["Urban", "Suburban", "Rural"]
+                }
+            },
+            "required": [
+                "state",
+                "created_at",
+                "model_year",
+                "region_type",
+                "info"
+            ]
+        },
+        "assets": {
+            "title": "Distribution System Assets",
+            "description": "Object capturing high level asset information.",
+            "type": "object",
+            "properties": {
+                "transformers": {
+                    "title": "Distribution Transformers",
+                    "description": "Object capturing high level information about distribution transformers.",
+                    "type": "array",
+                    "items": {
+                        "title": "Transformer Item",
+                        "description": "Object capturing high level information about transformer item.",
+                        "type": "object",
+                        "properties": {
+                            "kva": {
+                                "type": "integer",
+                                "title": "Capacity in kVA",
+                                "description": "Transformer capacity on kVA.",
+                                "minimum": 1
+                            },
+                            "count": {
+                                "type": "integer",
+                                "title": "Transformer Count",
+                                "description": "Number of transformers.",
+                                "minimum": 1
+                            },
+                            "is_regulator": {
+                                "type": "boolean",
+                                "title": "Is Regulator",
+                                "description": "True if regulator."
+                            },
+                            "is_substation_transformer": {
+                                "type": "boolean",
+                                "title": "Is Substation Transformer",
+                                "description": "Set to true if these are substation transformers."
+                            },
+                            "num_phase": {
+                                "type": "integer",
+                                "title": "Number of Phase",
+                                "description": "Transformer number of phase.",
+                                "minimum": 1,
+                                "maximum": 3
+                            },
+                            "high_kv": {
+                                "type": "number",
+                                "title": "High Voltage kV",
+                                "description": "Kilovolt rating for high voltage side.",
+                                "minimum": 0.01
+                            },
+                            "low_kv": {
+                                "type": "number",
+                                "title": "Low Voltage kV",
+                                "description": "Kilovolt rating for low voltage side.",
+                                "minimum": 0.01
+                            },
+                            "avg_customers_served": {
+                                "title": "Average Customers Served",
+                                "description": "Average number of customer served downward from these type of transformers.",
+                                "type": "number",
+                                "minimum": 0
+                            },
+                            "min_customers_served": {
+                                "title": "Minimum Customers Served",
+                                "description": "Minimum number of customer served downward from these type of transformers.",
+                                "type": "number",
+                                "minimum": 0
+                            },
+                            "max_customers_served": {
+                                "title": "Maximum Customers Served",
+                                "description": "Maximum number of customer served downward from these type of transformers.",
+                                "type": "number",
+                                "minimum": 0
+                            },
+                            "std_customers_served": {
+                                "title": "Standard Deviation Customers Served",
+                                "description": "Standard deviation number of customer served downward from these type of transformers.",
+                                "oneOf": [
+                                    {"type": "number"},
+                                    {"type": "string"}
+                                ]
+                            },
+                            "min_pct_peak_loading": {
+                                "type": "number",
+                                "title": "Minimum Percentage Peak Loading",
+                                "description": "Minimum percenatge loading of these type of transformers during peak load.",
+                                "minimum": 0
+                            },
+                            "avg_pct_peak_loading": {
+                                "type": "number",
+                                "title": "Average Percentage Peak Loading",
+                                "description": "Average percenatge loading of these type of transformers during peak load.",
+                                "minimum": 0
+                            },
+                            "max_pct_peak_loading": {
+                                "type": "number",
+                                "title": "Maximum Percentage Peak Loading",
+                                "description": "Maximum percenatge loading of these type of transformers during peak load.",
+                                "minimum": 0
+                            },
+                            "std_pct_peak_loading": {
+                                "title": "Standard Deviation Percentage Peak Loading",
+                                "description": "Standard deviation percenatge loading of these type of transformers during peak load.",
+                                "oneOf": [
+                                    {"type": "number"},
+                                    {"type": "string"}
+                                ]
+                            }
+                        },
+                        "required": [
+                            "kva",
+                            "is_substation_transformer",
+                            "num_phase",
+                            "high_kv",
+                            "low_kv",
+                            "count",
+                            "is_regulator",
+                            "avg_customers_served",
+                            "min_customers_served",
+                            "max_customers_served",
+                            "std_customers_served",
+                            "min_pct_peak_loading",
+                            "avg_pct_peak_loading",
+                            "max_pct_peak_loading",
+                            "std_pct_peak_loading"
+                        ]
+                    }
+                },
+                "feeder_sections": {
+                    "title": "Distribution Feeder Sections",
+                    "description": "High level information about feeder sections.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "title": "Feeder Section Item",
+                        "description": "Object representing high level information about feeder section item.",
+                        "properties": {
+                            "kv": {
+                                "type": "number",
+                                "title": "Feeder Section Voltage",
+                                "description": "Kilo volt rating of feeder section. Line to line for multi phase and line to ground for single phase.",
+                                "minimum": 0.01
+                            },
+                            "num_phase": {
+                                "type": "number",
+                                "title": "Feeder section number of phase.",
+                                "description": "Number of phase for feeder section.",
+                                "minimum": 1,
+                                "maximum": 3
+                            },
+                            "count": {
+                                "type": "number",
+                                "title": "Feeder Section Count",
+                                "description": "Number of feeder section for given voltage rating, num of phase and construction type.",
+                                "minimum": 1
+                            },
+                            "avg_feeder_miles": {
+                                "type": "number",
+                                "title": "Average Feeder Miles",
+                                "description": "Average feeder section length in miles.",
+                                "minimum": 0
+                            },
+                            "min_feeder_miles": {
+                                "type": "number",
+                                "title": "Mimumum Feeder Miles",
+                                "description": "Minimum feeder section length in miles.",
+                                "minimum": 0
+                            },
+                            "max_feeder_miles": {
+                                "type": "number",
+                                "title": "Maximum Feeder Miles",
+                                "description": "Maximum feeder section length in miles.",
+                                "minimum": 0
+                            },
+                            "std_feeder_miles": {
+                                "title": "Standard Deviation Feeder Miles",
+                                "description": "Standard deviation feeder section length in miles.",
+                                "oneOf": [
+                                    {"type": "number"},
+                                    {"type": "string"}
+                                ]
+                            },
+                            "min_ampacity": {
+                                "type": "number",
+                                "title": "Minimum Feeder Ampacity",
+                                "description": " feeder section ampere capacity.",
+                                "minimum": 0
+                            },
+                            "avg_ampacity": {
+                                "type": "number",
+                                "title": "Average Feeder Ampacity",
+                                "description": "Average feeder section ampere capacity.",
+                                "minimum": 0
+                            },
+                            "max_ampacity": {
+                                "type": "number",
+                                "title": "Maximum Feeder Ampacity",
+                                "description": "Maximum feeder section ampere capacity.",
+                                "minimum": 0
+                            },
+                            "std_ampacity": {
+                                "title": "Standard Deviation Feeder Ampacity",
+                                "description": "Standard deviation feeder section ampere capacity.",
+                                "oneOf": [
+                                    {"type": "number"},
+                                    {"type": "string"}
+                                ]
+                            },
+                            "avg_per_unit_resistance_ohm_per_mile": {
+                                "type": "number",
+                                "title": "Average Per Unit Resistance",
+                                "description": "Average per unit resistance for feeder sections."
+                            },
+                            "min_per_unit_resistance_ohm_per_mile": {
+                                "type": "number",
+                                "title": "Minimum Per Unit Resistance",
+                                "description": "Minimum per unit resistance for feeder sections."
+                            },
+                            "max_per_unit_resistance_ohm_per_mile": {
+                                "type": "number",
+                                "title": "Maximum Per Unit Resistance",
+                                "description": "Maximum per unit resistance for feeder sections."
+                            },
+                            "std_per_unit_resistance_ohm_per_mile": {
+                                "title": "Standard Deviation Per Unit Resistance",
+                                "description": "Standard Deviation of per unit resistance for feeder sections.",
+                                "oneOf": [
+                                    {"type": "number"},
+                                    {"type": "string"}
+                                ]
+                            },
+                            "avg_per_unit_reactance_ohm_per_mile": {
+                                "type": "number",
+                                "title": "Average Per Unit Reactance",
+                                "description": "Average per unit reactance for feeder sections."
+                            },
+                            "min_per_unit_reactance_ohm_per_mile": {
+                                "type": "number",
+                                "title": "Minimum Per Unit Reactance",
+                                "description": "Minimum per unit reactance for feeder sections."
+                            },
+                            "max_per_unit_reactance_ohm_per_mile": {
+                                "type": "number",
+                                "title": "Maximum Per Unit Reactance",
+                                "description": "Maximum per unit reactance for feeder sections."
+                            },
+                            "std_per_unit_reactance_ohm_per_mile": {
+                                "title": "Standard Deviation Per Unit Reactance",
+                                "description": "Standard Deviation of per unit reactance for feeder sections.",
+                                "oneOf": [
+                                    {"type": "number"},
+                                    {"type": "string"}
+                                ]
+                            },
+                            "min_customers_served": {
+                                "type": "number",
+                                "title": "Minimum number of customers served.",
+                                "description": "Minimum number of customers served directly or downward from this feeder section.",
+                                "minimum": 0
+                            },
+                            "avg_customers_served": {
+                                "type": "number",
+                                "title": "Average number of customers served.",
+                                "description": "Average number of customers served directly or downward from this feeder section.",
+                                "minimum": 0
+                            },
+                            "max_customers_served": {
+                                "type": "number",
+                                "title": "Maximum number of customers served.",
+                                "description": "Maximum number of customers served directly or downward from this feeder section.",
+                                "minimum": 0
+                            },
+                            "std_customers_served": {
+                                "title": "Standard Deviation number of customers served.",
+                                "description": "Standard deviation number of customers served directly or downward from this feeder section.",
+                                "oneOf": [
+                                    {"type": "number"},
+                                    {"type": "string"}
+                                ]
+                            },
+                            "min_pct_peak_loading": {
+                                "type": "number",
+                                "title": "Minimum Percentage Peak Loading",
+                                "description": "Minimum percenatge loading of these type of feeder sections during peak load.",
+                                "minimum": 0
+                            },
+                            "avg_pct_peak_loading": {
+                                "type": "number",
+                                "title": "Average Percentage Peak Loading",
+                                "description": "Average percenatge loading of these type of feeder sections during peak load.",
+                                "minimum": 0
+                            },
+                            "max_pct_peak_loading": {
+                                "type": "number",
+                                "title": "Maximum Percentage Peak Loading",
+                                "description": "Maximum percenatge loading of these type of feeder sections during peak load.",
+                                "minimum": 0
+                            },
+                            "std_pct_peak_loading": {
+                                "title": "Standard Deviation Percentage Peak Loading",
+                                "description": "Standard deviation percenatge loading of these type of feeder sections during peak load.",
+                                "oneOf": [
+                                    {"type": "number"},
+                                    {"type": "string"}
+                                ]
+                            }
+                        },
+                        "required": [
+                            "kv",
+                            "num_phase",
+                            "count",
+                            "avg_feeder_miles",
+                            "min_feeder_miles",
+                            "max_feeder_miles",
+                            "std_feeder_miles",
+                            "min_ampacity",
+                            "avg_ampacity",
+                            "max_ampacity",
+                            "std_ampacity",
+                            "avg_per_unit_resistance_ohm_per_mile",
+                            "min_per_unit_resistance_ohm_per_mile",
+                            "max_per_unit_resistance_ohm_per_mile",
+                            "std_per_unit_resistance_ohm_per_mile",
+                            "avg_per_unit_reactance_ohm_per_mile",
+                            "min_per_unit_reactance_ohm_per_mile",
+                            "max_per_unit_reactance_ohm_per_mile",
+                            "std_per_unit_reactance_ohm_per_mile",
+                            "min_customers_served",
+                            "avg_customers_served",
+                            "max_customers_served",
+                            "std_customers_served",
+                            "min_pct_peak_loading",
+                            "avg_pct_peak_loading",
+                            "max_pct_peak_loading",
+                            "std_pct_peak_loading"
+                        ]
+                    }
+                },
+                "capacitors": {
+                    "title": "Capacitors",
+                    "description": "Object representing high level information about capacitors.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "title": "Capacitor Item",
+                        "description": "Object representing high level information of a given type of capacitor.",
+                        "properties": {
+                            "kvar": {
+                                "type": "number",
+                                "title": "Capacitor Capacity",
+                                "description": "Nameplate rating of capacitor in kvar.",
+                                "minimum": 0.01
+                            },
+                            "num_phase": {
+                                "type": "number",
+                                "title": "Capacitor Number of Phase",
+                                "description": "Number of phase for capacitor",
+                                "minimum": 1,
+                                "maximum": 3
+                            },
+                            "kv": {
+                                "type": "number",
+                                "title": "Capacitor kV",
+                                "description": "Kilo volt rating for the capacitor.",
+                                "minimum": 0.01
+                            },
+                            "count": {
+                                "type": "number",
+                                "title": "Capacitor Count",
+                                "description": "Count of capacitors.",
+                                "minimum": 1
+                            }
+                        },
+                        "required": [
+                            "kvar",
+                            "count", 
+                            "num_phase",
+                            "kv"
+                        ]
+                    }
+                },
+                "switches": {
+                    "title": "Switches",
+                    "description": "High level information about switches present in the model.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "title": "Switch Item",
+                        "description": "Object representing high level information about given type of switch.",
+                        "properties": {
+                            "num_phase": {
+                                "type": "number",
+                                "minumum": 1,
+                                "maximum": 3,
+                                "title": "Switch Number Of Phase",
+                                "description": "Number of phase for switch item."
+                            },
+                            "kv": {
+                                "type": "number",
+                                "minimum": 0.01,
+                                "title": "Switch kV",
+                                "description": "Switch voltage rating in kV."
+                            },
+                            "is_normally_open": {
+                                "type": "boolean",
+                                "title": "Is Normally Open",
+                                "description": "Set to true if this switch is normally open."
+                            },
+                            "count": {
+                                "type": "number",
+                                "title": "Switch Count",
+                                "description": "Count of switches.",
+                                "minimum": 1
+                            },
+                            "avg_ampacity": {
+                                "type": "number",
+                                "title": "Average Switch Ampacity",
+                                "description": "Average switch rating in ampere.",
+                                "minimum": 0
+                            },
+                            "min_ampacity": {
+                                "type": "number",
+                                "title": "Minimum Switch Ampacity",
+                                "description": "Minimum switch rating in ampere.",
+                                "minimum": 0
+                            },
+                            "max_ampacity": {
+                                "type": "number",
+                                "title": "Maximum Switch Ampacity",
+                                "description": "Maximum switch rating in ampere.",
+                                "minimum": 0
+                            },
+                            "std_ampacity": {
+                                "title": "Standard Deviation Switch Ampacity",
+                                "description": "Standard deviation switch rating in ampere.",
+                                "oneOf": [
+                                    {"type": "number"},
+                                    {"type": "string"}
+                                ]
+                            }
+                        },
+                        "required": [
+                            "num_phase",
+                            "kv",
+                            "is_normally_open",
+                            "count",
+                            "avg_ampacity",
+                            "min_ampacity",
+                            "max_ampacity",
+                            "std_ampacity"
+                        ]
+                    }
+                },
+                "loads": {
+                    "title": "Loads",
+                    "description": "Represents high level load information.",
+                    "type": "array",
+                    "items": {
+                        "title": "Load Item",
+                        "description": "High level information about load item.",
+                        "type": "object",
+                        "properties": {
+                            "kv": {
+                                "type": "number",
+                                "title": "Load Voltage Rating",
+                                "description": "Load voltage rating in kilovolt.",
+                                "minimum": 0
+                            },
+                            "count": {
+                                "type": "number",
+                                "minimum": 1,
+                                "title": "Load Count",
+                                "description": "Count of loads."
+                            },
+                            "num_phase": {
+                                "type": "number",
+                                "minimum": 1,
+                                "maximum": 3,
+                                "title": "Number of Phase",
+                                "description": "Loads number of phase."
+                            },
+                            "total_customer": {
+                                "type": "number",
+                                "minimum": 1,
+                                "title": "Total Customer Count",
+                                "description": "Count of total customers."
+                            },
+                            "avg_customers_per_load": {
+                                "type": "number",
+                                "minimum": 1,
+                                "title": "Average Customers Per Load",
+                                "description": "Average count of customers per load."
+                            },
+                            "min_customers_per_load": {
+                                "type": "number",
+                                "minimum": 1,
+                                "title": "Minimum Customers Per Load",
+                                "description": "Minimum count of customers per load."
+                            },
+                            "max_customers_per_load": {
+                                "type": "number",
+                                "minimum": 1,
+                                "title": "Maximum Customers Per Load",
+                                "description": "Maximum count of customers per load."
+                            },
+                            "std_customers_per_load": {
+                                "title": "Standard Deviation Customers Per Load",
+                                "description": "Standard deviation count of customers per load.",
+                                "oneOf": [
+                                    {"type": "number"},
+                                    {"type": "string"}
+                                ]
+                            },
+                            "avg_peak_kw": {
+                                "type": "number",
+                                "minimum": 0,
+                                "title": "Average Peak kW",
+                                "description": "Average peak active power consumption in kW."
+                            },
+                            "avg_peak_kvar": {
+                                "type": "number",
+                                "minimum": 0,
+                                "title": "Average Peak kVAR",
+                                "description": "Average peak reactive power consumption in kVAR."
+                            },
+                            "min_peak_kw": {
+                                "type": "number",
+                                "minimum": 0,
+                                "title": "Minimum Peak kW",
+                                "description": "Minimum peak active power consumption in kW."
+                            },
+                            "min_peak_kvar": {
+                                "type": "number",
+                                "minimum": 0,
+                                "title": "Minimum Peak kVAR",
+                                "description": "Minimum peak reactive power consumption in kVAR."
+                            },
+                            "max_peak_kw": {
+                                "type": "number",
+                                "minimum": 0,
+                                "title": "Maximum Peak kW",
+                                "description": "Maximum peak active power consumption in kW."
+                            },
+                            "max_peak_kvar": {
+                                "type": "number",
+                                "minimum": 0,
+                                "title": "Maximum Peak kVAR",
+                                "description": "Maximum peak reactive power consumption in kVAR."
+                            },
+                            "std_peak_kw": {
+                                "title": "Standard Deviation Peak kW",
+                                "description": "Standard deviation peak active power consumption in kW.",
+                                "oneOf": [
+                                    {"type": "number"},
+                                    {"type": "string"}
+                                ]
+                            },
+                            "std_peak_kvar": {
+                                "title": "Standard Deviation Peak kVAR",
+                                "description": "Standard deviation peak reactive power consumption in kVAR.",
+                                "oneOf": [
+                                    {"type": "number"},
+                                    {"type": "string"}
+                                ]
+                            }
+                        },
+                        "required": [
+                            "kv",
+                            "count",
+                            "num_phase",
+                            "total_customer",
+                            "avg_customers_per_load",
+                            "min_customers_per_load",
+                            "max_customers_per_load",
+                            "std_customers_per_load",
+                            "avg_peak_kw",
+                            "avg_peak_kvar",
+                            "min_peak_kw",
+                            "min_peak_kvar",
+                            "max_peak_kw",
+                            "max_peak_kvar",
+                            "std_peak_kw",
+                            "std_peak_kvar"
+                        ]
+                    }
+                }
+            }
+        },
+        "voltage_metrics": {
+            "type": "array",
+            "title": "Voltage Metrics",
+            "description": "High level information about voltage metrics.",
+            "items": {
+                "type": "object",
+                "title": "Voltage Metric",
+                "description": "Summary of voltage metrics.",
+                "properties": {
+                    "snapshot_category": {
+                        "type": "string",
+                        "enum": ["NetPeakLoad", "NetMinLoad", "BasePeakLoad", "BaseMinLoad"],
+                        "title": "Snapshot Category",
+                        "description": "Snapshot category from which these metrics are generated."
+                    },
+                    "kv": {
+                        "type": "number",
+                        "minimum": 0.01,
+                        "title": "Voltage Level",
+                        "description": "Voltage level in kV."
+                    },
+                    "num_phase": {
+                        "type": "number",
+                        "minimum": 1,
+                        "maximum": 3,
+                        "title": "Numberf of Phase",
+                        "description": "Number of phase."
+                    },
+                    "avg_voltage_pu": {
+                        "type": "number",
+                        "miniumum": 0,
+                        "maximum": 2.0,
+                        "title": "Average PU Voltage",
+                        "description": "Average per unit voltage."
+                    },
+                    "min_voltage_pu": {
+                        "type": "number",
+                        "miniumum": 0,
+                        "maximum": 2.0,
+                        "title": "Minimum PU Voltage",
+                        "description": "Minimum per unit voltage."
+                    },
+                    "max_voltage_pu": {
+                        "type": "number",
+                        "miniumum": 0,
+                        "maximum": 2.0,
+                        "title": "Maximum PU Voltage",
+                        "description": "Maximum per unit voltage."
+                    },
+                    "std_voltage_pu": {
+                        "title": "Standard Deviation PU Voltage",
+                        "description": "Standard deviation per unit voltage.",
+                        "oneOf": [
+                            {"type": "number", "maximum": 2.0},
+                            {"type": "string"}
+                        ]
+                        
+                    }
+                },
+                "required": [
+                    "snapshot_category",
+                    "kv",
+                    "num_phase",
+                    "avg_voltage_pu",
+                    "min_voltage_pu",
+                    "max_voltage_pu",
+                    "std_voltage_pu"
+                ]
+            }
+        }
+    },
+    "required": [
+        "metadata",
+        "assets",
+        "voltage_metrics"
+    ]
+}

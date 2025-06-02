@@ -1,0 +1,80 @@
+name: 💡 Feature Request
+description: Suggest a new feature or enhancement for grid-meta.
+labels: [feature request]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        👋 **Thanks for helping improve `grid-meta`!**
+
+        Please fill out the form below to submit a clear and actionable feature request.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: ✅ Preliminary Checks
+      description: Ensure your request is relevant and not already tracked.
+      options:
+        - label: I have searched **existing issues** to confirm this is a **new** feature request.
+          required: true
+        - label: I have reviewed the **documentation** and believe this feature is missing or could be improved.
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🔍 Problem or Use Case
+      description: |
+        Describe the **problem or use case** that this feature would solve.
+
+        This helps us understand the motivation behind your request.
+      placeholder: |
+        As a user of `grid-meta`, I often find myself needing to...
+
+        Currently, there's no clean way to...
+      validations:
+        required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 💡 Feature Proposal
+      description: |
+        Describe the **feature you'd like to see** and how it could work.
+
+        If possible, include examples, pseudo-code, or references to similar tools.
+      placeholder: |
+        I propose adding a `gridmeta.optimize()` function that...
+
+        It could work like this:
+        ```python
+        result = gridmeta.optimize(params={...})
+        ```
+      validations:
+        required: true
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: 🌟 Benefits
+      description: |
+        How would this feature benefit users or improve the `grid-meta` library?
+
+        Consider productivity, performance, usability, etc.
+      placeholder: |
+        This would streamline workflows by...
+
+        It would also reduce boilerplate and improve usability for...
+  
+  - type: textarea
+    id: additional
+    attributes:
+      label: 🔗 Additional Context or References
+      description: |
+        Share any links, mockups, related issues, or external references that support your request.
+      placeholder: |
+        Related issue: #123
+
+        Similar feature in library X: https://...
+

@@ -1,0 +1,37 @@
+name: 🧪 Test Case Request
+description: Request a minimal reproducible test case for an unclear or complex bug.
+labels: [triage, needs-test]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        🧪 **We need more information to investigate this issue.**
+
+        Please help by providing a clear and minimal example that reproduces the problem.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: ❓ What's Missing?
+      description: |
+        Briefly describe what part of the original report was unclear or missing a test.
+      placeholder: |
+        The original bug report does not include reproducible code or clear steps to trigger the error.
+
+  - type: textarea
+    id: request
+    attributes:
+      label: 🙏 What Do You Need?
+      description: |
+        What specific test case, scenario, or setup do you need the reporter to provide?
+      placeholder: |
+        Please provide a minimal script that includes:
+        - imports
+        - configuration setup
+        - exact input that triggers the bug
+
+  - type: markdown
+    attributes:
+      value: |
+        🧩 The more minimal and focused the test case, the faster we can resolve the issue!

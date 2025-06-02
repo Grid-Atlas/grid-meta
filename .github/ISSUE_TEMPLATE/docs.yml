@@ -1,0 +1,45 @@
+name: 📄 Documentation Improvement
+description: Suggest an update, correction, or improvement to the documentation.
+labels: [documentation]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        📚 **Thanks for helping improve our documentation!**
+
+        Please fill out the form below so we can understand and address your feedback quickly.
+
+  - type: textarea
+    id: location
+    attributes:
+      label: 📍 Documentation Location
+      description: |
+        Where did you find the issue? Include the page, function, or link.
+      placeholder: |
+        Example:
+        - Function: `gridmeta.load_config()`
+        - File: `docs/usage.md`
+        - Section: "Loading Configurations"
+      validations:
+        required: true
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: ✏️ What's the Issue?
+      description: |
+        Describe the problem or missing information in the documentation.
+        Be specific so we can fix it effectively.
+      placeholder: |
+        The example code is outdated — it uses a function that no longer exists.
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 💡 Suggested Improvement
+      description: |
+        If you have suggestions for how to fix or improve the doc, include them here.
+        You can include edits, examples, or external references.
+      placeholder: |
+        Update the example to use `gridmeta.load_from_yaml()` instead of `gridmeta.load_config()`.

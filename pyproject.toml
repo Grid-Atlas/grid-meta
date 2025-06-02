@@ -1,0 +1,90 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gridmeta"
+dynamic = ["version"]
+description = 'A repository for extracting dehydrated metadata for distribution power grid model.'
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Kapil Duwadi", email = "kapil.duwadi@pnnl.gov" },
+  { name = "Kaustav Bhattacharjee", email = "kaustav.bhattacharjee@pnnl.gov"},
+  { name = "Alexander Anderson", email="Alexander.Anderson@pnnl.gov"},
+  { name = "Rabayet Sadnan", email="rabayet.sadnan@pnnl.gov"}
+]
+classifiers = [
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+  "opendssdirect.py~=0.9.4",
+  "jsonschema~=4.24.0",
+  "requests~=2.32.3",
+  "pydantic~=2.11.5",
+  "pandas~=2.2.3",
+  "click~=8.2.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pre-commit~=4.2.0", 
+  "pytest~=8.4.0", 
+  "ruff~=0.11.12",
+  "pytest-mock~=3.14.1"
+]
+doc = []
+
+[project.scripts]
+gridmeta = "gridmeta.cli.cli:cli"
+
+[tool.ruff]
+exclude = [".git", ".ruff_cache", ".venv", "_build", "build", "dist", "venv"]
+line-length = 99
+indent-width = 4
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+  "C901", # McCabe complexity
+  "E4",   # imports formatting, wrong import spacing or grouping
+  "E7",   # indentation issues
+  "E9",   # runtime syntax errors
+  "F",    # Pyflakes e.g. unused imports, undefined variables, redefined functions
+  "W",    # minor style line line breaks, training whitespaces
+  "B",    # flake8-bugbear
+]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
+
+[project.urls]
+Documentation = "https://github.com/grid-atlas/gridmeta"
+Issues = "https://github.com/grid-atlas/gridmeta/issues"
+Source = "https://github.com/grid-atlas/gridmeta"
+
+[tool.hatch.version]
+path = "src/gridmeta/version.py"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/gridmeta"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/gridmeta"]

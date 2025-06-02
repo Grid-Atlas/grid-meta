@@ -1,0 +1,86 @@
+name: 🐛 Bug Report
+description: Report a bug or unexpected behavior in grid-meta.
+labels: [bug, pending]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        👋 **Thanks for taking the time to report a bug in `grid-meta`!**
+
+        Before submitting this issue, please make sure you've checked the following:
+
+  - type: checkboxes
+    id: preliminary
+    attributes:
+      label: ✅ Preliminary Checks
+      description: Ensure the issue hasn't already been reported.
+      options:
+        - label: I have searched **existing issues** and confirmed this is a **new bug**.
+          required: true
+        - label: I have reviewed the **README** and relevant documentation.
+          required: true
+        - label: I am confident this issue is related to **`grid-meta`**, not my own code or another library.
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Bug Description
+      description: |
+        Clearly describe the issue you're experiencing.
+
+        Include:
+        - What is currently happening?
+        - What did you expect to happen instead?
+        - Any relevant context or screenshots, if applicable.
+      placeholder: |
+        When I try to use `gridmeta.load_config()`, it throws an unexpected KeyError...
+
+        Expected behavior: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: 🔁 Minimal Reproducible Example
+      description: |
+        Please provide a **minimal** and **self-contained** code snippet that reproduces the issue.
+
+        This helps us debug faster. Avoid sharing full projects or unrelated code.
+      placeholder: |
+        ```python
+        import gridmeta
+
+        # Minimal reproducible example
+        ...
+        ```
+      render: python
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 📦 Environment Details
+      description: |
+        Which version of Python and `gridmeta` are you using?
+
+        Please run the following and paste the output below:
+        ```bash
+        python -c "import gridmeta.version; print(gridmeta.version.version_summary())"
+        ```
+      placeholder: |
+        Python: 3.11.3
+        gridmeta: 0.4.2
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: ➕ Additional Information
+      description: |
+        Include any other context, logs, tracebacks, or links to related issues.
+      placeholder: |
+        Stack trace, config file, or anything else that could help.

@@ -1,0 +1,41 @@
+name: 🧹 Refactor or Code Cleanup
+description: Suggest a refactor or internal improvement that doesn't change behavior.
+labels: [refactor, tech debt]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        🧼 **Help us keep the codebase clean and maintainable!**
+
+        Use this template to propose refactoring, code cleanup, or simplification ideas.
+
+  - type: textarea
+    id: area
+    attributes:
+      label: 🧭 Code Area
+      description: What part of the codebase needs refactoring? Be specific.
+      placeholder: |
+        Example:
+        - Module: `gridmeta.core.model`
+        - Function: `evaluate_energy_model()`
+      validations:
+        required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🤔 What’s the Problem?
+      description: |
+        Describe the issue with the current implementation (e.g., complexity, duplication, poor readability).
+      placeholder: |
+        The function is over 100 lines and has deeply nested `if` blocks — it's hard to read and maintain.
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 🛠 Suggested Refactor
+      description: |
+        Propose how the code can be improved (e.g., extract methods, split classes, rename variables).
+      placeholder: |
+        Split the logic into smaller helper functions and add type annotations for better clarity.
