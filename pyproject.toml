@@ -8,7 +8,7 @@ dynamic = ["version"]
 description = 'A repository for extracting dehydrated metadata for distribution power grid model.'
 readme = "README.md"
 requires-python = ">=3.11"
-license = "MIT"
+license = "BSD-3-Clause"
 keywords = []
 authors = [
   { name = "Kapil Duwadi", email = "kapil.duwadi@pnnl.gov" },
