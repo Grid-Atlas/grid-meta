@@ -9,14 +9,14 @@ import numpy as np
 
 from gridmeta.models import (
     Metadata,
-    DistributionSystemDehydratedDataset,
-    Assets,
+    DehydrationMetadataV1,
+    DistributionSystemAssets,
     VoltageMetric,
-    Load,
-    Transformer,
-    FeederSection,
-    Capacitor,
-    Switch,
+    LoadItem,
+    TransformerItem,
+    FeederSectionItem,
+    CapacitorItem,
+    SwitchItem,
     SnapshotCategory,
 )
 from gridmeta.json_utils import write_to_json_file, validate_json_data_from_schema_file
@@ -35,15 +35,15 @@ UNIT_MAPPER = {
 }
 
 
-def get_load_assets_from_opendss_dataframe(load_df: pd.DataFrame) -> list[Load]:
+def get_load_assets_from_opendss_dataframe(load_df: pd.DataFrame) -> list[LoadItem]:
     """Function to return load objects from opendss load data frame."""
 
     load_group = load_df.groupby(["Phases", "kV"])[["NumCust", "kW", "kvar"]].agg(
         ["mean", "min", "max", "std", "count", "sum"]
     )
-    load_objects: list[Load] = []
+    load_objects: list[LoadItem] = []
     for (phases, kv), row in load_group.iterrows():
-        load_obj = Load(
+        load_obj = LoadItem(
             kv=kv,
             count=row[("NumCust", "count")],
             num_phase=phases,
@@ -69,7 +69,7 @@ def get_load_assets_from_opendss_dataframe(load_df: pd.DataFrame) -> list[Load]:
 
 def get_transformer_assets_from_dataframe(
     transformer_df: pd.DataFrame,
-) -> list[Transformer]:
+) -> list[TransformerItem]:
     """Function to return transformer objects from transformer data frame."""
 
     transformer_group = transformer_df.groupby(
@@ -77,7 +77,7 @@ def get_transformer_assets_from_dataframe(
     )[["num_customers_served", "pct_peak_loading"]].agg(
         ["mean", "min", "max", "std", "count", "sum"]
     )
-    transformer_objects: list[Transformer] = []
+    transformer_objects: list[TransformerItem] = []
     for (
         kva,
         is_substation,
@@ -86,7 +86,7 @@ def get_transformer_assets_from_dataframe(
         num_phase,
         is_regulator,
     ), row in transformer_group.iterrows():
-        transformer_obj = Transformer(
+        transformer_obj = TransformerItem(
             kva=int(kva),
             count=row[("num_customers_served", "count")],
             num_phase=num_phase,
@@ -113,7 +113,7 @@ def get_transformer_assets_from_dataframe(
 
 def get_feeder_sections_from_dataframe(
     lines_df: pd.DataFrame,
-) -> list[FeederSection]:
+) -> list[FeederSectionItem]:
     """Function to return feeder section objects from lines data frame."""
 
     feeder_group = lines_df.groupby(["voltage_lg_kv", "num_phases"])[
@@ -126,12 +126,12 @@ def get_feeder_sections_from_dataframe(
             "line_length_miles",
         ]
     ].agg(["mean", "min", "max", "std", "count", "sum"])
-    feeder_objects: list[FeederSection] = []
+    feeder_objects: list[FeederSectionItem] = []
     for (
         kv,
         num_phase,
     ), row in feeder_group.iterrows():
-        feeder_obj = FeederSection(
+        feeder_obj = FeederSectionItem(
             kv=kv,
             count=row[("num_customers_served", "count")],
             num_phase=num_phase,
@@ -176,7 +176,7 @@ def get_feeder_sections_from_dataframe(
 
 def get_switch_sections_from_dataframe(
     switches_df: pd.DataFrame,
-) -> list[Switch]:
+) -> list[SwitchItem]:
     """Function to return switch section objects from switches data frame."""
 
     switch_group = switches_df.groupby(["voltage_lg_kv", "num_phases", "is_open"])[
@@ -184,9 +184,9 @@ def get_switch_sections_from_dataframe(
             "ampacity",
         ]
     ].agg(["mean", "min", "max", "std", "count", "sum"])
-    switch_objects: list[Switch] = []
+    switch_objects: list[SwitchItem] = []
     for (kv, num_phase, is_open), row in switch_group.iterrows():
-        switch_obj = Switch(
+        switch_obj = SwitchItem(
             kv=kv,
             count=row[("ampacity", "count")],
             num_phase=num_phase,
@@ -200,12 +200,12 @@ def get_switch_sections_from_dataframe(
     return switch_objects
 
 
-def get_capacitors_from_dataframe(cap_df: pd.DataFrame) -> list[Capacitor]:
+def get_capacitors_from_dataframe(cap_df: pd.DataFrame) -> list[CapacitorItem]:
     """Get capacitor objects from capacitor dataframe."""
     cap_group = cap_df.groupby(["kv", "num_phases", "kvar"])
-    cap_objects: list[Capacitor] = []
+    cap_objects: list[CapacitorItem] = []
     for (kv, num_phase, kvar), group in cap_group:
-        cap_obj = Capacitor(kv=kv, count=len(group), num_phase=num_phase, kvar=kvar)
+        cap_obj = CapacitorItem(kv=kv, count=len(group), num_phase=num_phase, kvar=kvar)
         cap_objects.append(cap_obj)
     return cap_objects
 
@@ -411,23 +411,23 @@ class OpenDSS:
 
 
 class OpenDSSMetdataExtractorV1:
-    schema_file_path = Path(__file__).parent / "schemas" / "dehydration-metadata.v1.schema.json"
+    schema_file_path = Path(__file__).parent / "schemas" / "DehydrationMetadataV1.schema.json"
 
     def __init__(self, master_dss_file: Path, metadata: Metadata):
         self.master_dss_file = master_dss_file
         self.metadata = metadata
         self.opendss = OpenDSS(master_dss_file)
 
-    def get_dehydration_dataset(self) -> DistributionSystemDehydratedDataset:
+    def get_dehydration_dataset(self) -> DehydrationMetadataV1:
         asset_data = self.get_asset_data_object()
         voltage_metrics_data = self.get_voltage_metrics_object()
-        return DistributionSystemDehydratedDataset(
+        return DehydrationMetadataV1(
             metadata=self.metadata,
             voltage_metrics=voltage_metrics_data,
             assets=asset_data,
         )
 
-    def validate_dehydrated_data(self, dehydrated_data: DistributionSystemDehydratedDataset):
+    def validate_dehydrated_data(self, dehydrated_data: DehydrationMetadataV1):
         validate_json_data_from_schema_file(
             dehydrated_data.model_dump(mode="json"), self.schema_file_path
         )
@@ -445,8 +445,8 @@ class OpenDSSMetdataExtractorV1:
         )
         write_to_json_file(privacy_metadata, out_json_file)
 
-    def get_asset_data_object(self) -> Assets:
-        return Assets(
+    def get_asset_data_object(self) -> DistributionSystemAssets:
+        return DistributionSystemAssets(
             transformers=get_transformer_assets_from_dataframe(
                 self.opendss.get_transformer_dataframe()
             ),

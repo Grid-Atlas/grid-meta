@@ -28,6 +28,7 @@ dependencies = [
   "pydantic~=2.11.5",
   "pandas~=2.2.3",
   "click~=8.2.1",
+  "datamodel-code-generator~=0.31.2"
 ]
 
 [project.optional-dependencies]
@@ -37,7 +38,11 @@ dev = [
   "ruff~=0.11.12",
   "pytest-mock~=3.14.1"
 ]
-doc = []
+doc = [
+  "mkdocs-material~=9.6.14",
+  "mike~=2.1.3",
+  "mdutils~=1.7.0"
+]
 
 [project.scripts]
 gridmeta = "gridmeta.cli.cli:cli"
@@ -50,7 +55,6 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = [
-  "C901", # McCabe complexity
   "E4",   # imports formatting, wrong import spacing or grouping
   "E7",   # indentation issues
   "E9",   # runtime syntax errors
@@ -58,7 +62,8 @@ select = [
   "W",    # minor style line line breaks, training whitespaces
   "B",    # flake8-bugbear
 ]
-ignore = []
+ignore = ["C901"]
+exclude = ["docs/doc.py"]
 
 [tool.ruff.format]
 quote-style = "double"

@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "Distribution System Dehydrated Dataset",
+    "title": "Dehydration Metadata V1",
     "description": "Data representation after obfuscating distribution system model.",
     "type": "object",
     "properties": {

@@ -14,13 +14,13 @@ from gridmeta.opendss import (
     OpenDSSMetdataExtractorV1,
 )
 from gridmeta.models import (
-    Load,
-    Transformer,
-    FeederSection,
-    Capacitor,
-    Switch,
+    LoadItem,
+    TransformerItem,
+    FeederSectionItem,
+    CapacitorItem,
+    SwitchItem,
     Metadata,
-    RegionType,
+    FeederCategory,
 )
 
 opendss_root_folder = Path(__file__).parent / "data/opendss"
@@ -67,7 +67,7 @@ def test_load_asset_creation(dss_instance):
     load_assets = get_load_assets_from_opendss_dataframe(load_df)
     assert isinstance(load_assets, list)
     assert len(load_assets) >= 1
-    assert all([isinstance(item, Load) for item in load_assets])
+    assert all([isinstance(item, LoadItem) for item in load_assets])
 
 
 def test_transformer_dataframe_creation(dss_instance):
@@ -80,7 +80,7 @@ def test_transformer_asset_creation(dss_instance):
     transformer_assets = get_transformer_assets_from_dataframe(transformer_df)
     assert isinstance(transformer_assets, list)
     assert len(transformer_assets) >= 1
-    assert all([isinstance(item, Transformer) for item in transformer_assets])
+    assert all([isinstance(item, TransformerItem) for item in transformer_assets])
 
 
 def test_feeder_sections_creation(dss_instance):
@@ -88,7 +88,7 @@ def test_feeder_sections_creation(dss_instance):
     feeder_assets = get_feeder_sections_from_dataframe(lines_df)
     assert isinstance(feeder_assets, list)
     assert len(feeder_assets) >= 1
-    assert all([isinstance(item, FeederSection) for item in feeder_assets])
+    assert all([isinstance(item, FeederSectionItem) for item in feeder_assets])
 
 
 def test_switch_sections_creation(dss_instance):
@@ -96,7 +96,7 @@ def test_switch_sections_creation(dss_instance):
     switch_assets = get_switch_sections_from_dataframe(switches_df)
     assert isinstance(switch_assets, list)
     assert len(switch_assets) >= 1
-    assert all([isinstance(item, Switch) for item in switch_assets])
+    assert all([isinstance(item, SwitchItem) for item in switch_assets])
 
 
 def test_capacitors_creation(dss_instance):
@@ -104,7 +104,7 @@ def test_capacitors_creation(dss_instance):
     capacitor_assets = get_capacitors_from_dataframe(capacitor_df)
     assert isinstance(capacitor_assets, list)
     assert len(capacitor_assets) >= 1
-    assert all([isinstance(item, Capacitor) for item in capacitor_assets])
+    assert all([isinstance(item, CapacitorItem) for item in capacitor_assets])
 
 
 def test_metadata_extraction(opendss_model, tmp_path):
@@ -114,7 +114,7 @@ def test_metadata_extraction(opendss_model, tmp_path):
             state="WA",
             created_at=datetime.datetime.now(),
             model_year=2018,
-            region_type=RegionType.Suburban,
+            region_type=FeederCategory.Suburban,
             info="Test IEEE feeder",
         ),
     )

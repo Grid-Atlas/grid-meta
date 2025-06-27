@@ -1,0 +1,1 @@
+datamodel-codegen --input src/gridmeta/schemas/DehydrationMetadataV1.schema.json --output src/gridmeta/models.py --base-class pydantic.BaseModel --use-schema-description --use-title-as-name

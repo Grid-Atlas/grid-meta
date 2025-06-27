@@ -1,19 +1,62 @@
-# GridMeta
+# Getting Started with `grid-meta`
 
-A repository for extracting dehydrated metadata for distribution power grid model.
+[![Build](https://github.com/Grid-Atlas/grid-meta/actions/workflows/ci.yml/badge.svg)](https://github.com/Grid-Atlas/grid-meta/actions/workflows/ci.yml)
+![Python](https://img.shields.io/pypi/pyversions/grid-meta)
+![License](https://img.shields.io/github/license/Grid-Atlas/grid-meta)
+![Coverage](https://img.shields.io/codecov/c/github/Grid-Atlas/grid-meta)
 
-## How to install 
+[View Full Documentation.](https://grid-atlas.github.io/grid-meta).
 
-Please clone the repository and install it until we have python package for this.
-Before you install please make sure you have activated your virtual environment.
+Welcome! Follow the steps below to get `grid-meta` up and running locally.  
+We recommend using a Python virtual environment for a clean install 🔒🐍.
 
-```python
-git clone https://tanuki.pnnl.gov/gridatlas/gridmeta.git
-cd gridmeta
-pip install -e.
+> 💡 **Note:** In the future, `grid-meta` may be installable directly via `pip install gridmeta`. For now, follow the instructions below.
+
+---
+
+## 📦 Step 1: Clone the Repository
+
+First, download the codebase to your machine:
+
+```bash
+git clone https://github.com/Grid-Atlas/grid-meta.git
+cd grid-meta
 ```
 
-## Usage
+## 🧪 Step 2: Set Up a Python Environment
+
+To avoid dependency conflicts, create and activate a virtual environment.
+
+You can use any tool of your choice — here are a few popular options:
+
+<details> <summary><strong>🟢 Option A: Using <code>venv</code> (Standard Library)</strong></summary>
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+</details> <details> <summary><strong>🔵 Option B: Using <code>conda</code></strong></summary>
+
+```bash
+conda create -n grid-reducer-env python=3.10
+conda activate grid-reducer-env
+```
+
+</details>
+
+## 🚀 Step 3: Install the Project Locally
+
+Install the project in editable mode so changes to the code reflect immediately:
+
+```bash
+pip install -e .
+```
+
+✅ This will also install all required dependencies.
+
+
+## 🛠 Example CLI Usage
 
 You can currently use this package as CLI tool. To see the available commands please use following command.
 
