@@ -1,0 +1,85 @@
+name: Deploy MkDocs with Mike
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -e.[doc]
+
+      - name: Extract Major Version
+        id: version
+        run: |
+          python <<EOF > version.txt
+          from gridmeta.version import VERSION
+          major = VERSION.split(".")[0]
+          minor = VERSION.split(".")[1]
+          print(f"{major}.{minor}")
+          EOF
+          echo "DOC_VERSION=$(cat version.txt)" >> $GITHUB_ENV
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions@github.com"
+
+      - name: Delete Existing Version (If Exists)
+        run: |
+          git fetch origin gh-pages || echo "No gh-pages branch to fetch"
+          mike delete $DOC_VERSION --push || echo "No existing version $DOC_VERSION to delete"
+
+      - name: Deploy Site with Mike
+        run: |
+          mike deploy --push --update-aliases $DOC_VERSION latest
+
+      - name: Set Default Version (Optional)
+        run: |
+          mike set-default --push latest
+
+      - name: Prune Old Versions (Keep Last 10)
+        run: |
+          mike list --json > versions.json || echo "⚠️ Warning: mike list failed or returned no data"
+          cat versions.json
+          python <<EOF
+          import json
+          import subprocess
+          import os
+
+          try:
+            with open("versions.json") as f:
+                versions = json.load(f)
+
+            version_names = [v["version"] for v in versions if not v.get("alias", False)]
+
+            if len(version_names) > 10:
+                to_delete = version_names[:-10]
+                for v in to_delete:
+                    print(f"🗑️ Deleting old version: {v}")
+                    subprocess.run(["mike", "delete", v, "--push"], check=False)
+            else:
+                print("✅ Less than or equal to 10 versions. No deletion needed.")
+          except Exception as e:
+              print("❌ Error during pruning:", str(e))
+          EOF
+          
