@@ -387,10 +387,10 @@ class OpenDSS:
             # 0 for Reg1 and Reg2 however for Reg3 we get all 15. Not sure if this is intentional.
             # Ideally you would create your own graph and solve this the way you like
             # for now I am going OpenDSSDirect's TotalCustomer implementation.
-            # Revist this in the future if causing too much trouble.
+            # Revisit this in the future if causing too much trouble.
 
             # Assumption: All transformers connected to highest voltage will be considered substation
-            # transformers. Obvisouly a substation might contain transformers with different voltage levels
+            # transformers. Obviously a substation might contain transformers with different voltage levels
             # Will need to refine this logic.
 
             transformer_objects.append(
@@ -410,7 +410,7 @@ class OpenDSS:
         return pd.DataFrame(transformer_objects)
 
 
-class OpenDSSMetdataExtractorV1:
+class OpenDSSMetadataExtractorV1:
     schema_file_path = Path(__file__).parent / "schemas" / "DehydrationMetadataV1.schema.json"
 
     def __init__(self, master_dss_file: Path, metadata: Metadata):

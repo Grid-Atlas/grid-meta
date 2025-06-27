@@ -130,7 +130,7 @@ Standard deviation number of customer served downward from these type of transfo
 
 ## min_pct_peak_loading
 
-Minimum percenatge loading of these type of transformers during peak load.
+Minimum percentage loading of these type of transformers during peak load.
 
 
 - is required
@@ -139,7 +139,7 @@ Minimum percenatge loading of these type of transformers during peak load.
 Minimum Number: `0`
 ## avg_pct_peak_loading
 
-Average percenatge loading of these type of transformers during peak load.
+Average percentage loading of these type of transformers during peak load.
 
 
 - is required
@@ -148,7 +148,7 @@ Average percenatge loading of these type of transformers during peak load.
 Minimum Number: `0`
 ## max_pct_peak_loading
 
-Maximum percenatge loading of these type of transformers during peak load.
+Maximum percentage loading of these type of transformers during peak load.
 
 
 - is required
@@ -157,7 +157,7 @@ Maximum percenatge loading of these type of transformers during peak load.
 Minimum Number: `0`
 ## std_pct_peak_loading
 
-Standard deviation percenatge loading of these type of transformers during peak load.
+Standard deviation percentage loading of these type of transformers during peak load.
 
 
 - is required

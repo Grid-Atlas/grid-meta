@@ -11,7 +11,7 @@ from gridmeta.opendss import (
     get_feeder_sections_from_dataframe,
     get_capacitors_from_dataframe,
     get_switch_sections_from_dataframe,
-    OpenDSSMetdataExtractorV1,
+    OpenDSSMetadataExtractorV1,
 )
 from gridmeta.models import (
     LoadItem,
@@ -108,7 +108,7 @@ def test_capacitors_creation(dss_instance):
 
 
 def test_metadata_extraction(opendss_model, tmp_path):
-    extractor = OpenDSSMetdataExtractorV1(
+    extractor = OpenDSSMetadataExtractorV1(
         opendss_model,
         metadata=Metadata(
             state="WA",

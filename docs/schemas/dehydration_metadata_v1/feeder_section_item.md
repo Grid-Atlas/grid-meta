@@ -15,7 +15,7 @@ Additional Properties Allowed: `True`
 |[num_phase](#num_phase)|`number`|:white_check_mark:||Feeder section number of phase.|
 |[count](#count)|`number`|:white_check_mark:||Feeder Section Count|
 |[avg_feeder_miles](#avg_feeder_miles)|`number`|:white_check_mark:||Average Feeder Miles|
-|[min_feeder_miles](#min_feeder_miles)|`number`|:white_check_mark:||Mimumum Feeder Miles|
+|[min_feeder_miles](#min_feeder_miles)|`number`|:white_check_mark:||Minimum Feeder Miles|
 |[max_feeder_miles](#max_feeder_miles)|`number`|:white_check_mark:||Maximum Feeder Miles|
 |[std_feeder_miles](#std_feeder_miles)|`number \| string`|:white_check_mark:||Standard Deviation Feeder Miles|
 |[min_ampacity](#min_ampacity)|`number`|:white_check_mark:||Minimum Feeder Ampacity|
@@ -258,7 +258,7 @@ Standard deviation number of customers served directly or downward from this fee
 
 ## min_pct_peak_loading
 
-Minimum percenatge loading of these type of feeder sections during peak load.
+Minimum percentage loading of these type of feeder sections during peak load.
 
 
 - is required
@@ -267,7 +267,7 @@ Minimum percenatge loading of these type of feeder sections during peak load.
 Minimum Number: `0`
 ## avg_pct_peak_loading
 
-Average percenatge loading of these type of feeder sections during peak load.
+Average percentage loading of these type of feeder sections during peak load.
 
 
 - is required
@@ -276,7 +276,7 @@ Average percenatge loading of these type of feeder sections during peak load.
 Minimum Number: `0`
 ## max_pct_peak_loading
 
-Maximum percenatge loading of these type of feeder sections during peak load.
+Maximum percentage loading of these type of feeder sections during peak load.
 
 
 - is required
@@ -285,7 +285,7 @@ Maximum percenatge loading of these type of feeder sections during peak load.
 Minimum Number: `0`
 ## std_pct_peak_loading
 
-Standard deviation percenatge loading of these type of feeder sections during peak load.
+Standard deviation percentage loading of these type of feeder sections during peak load.
 
 
 - is required
