@@ -13,7 +13,7 @@ Additional Properties Allowed: `True`
 | :---: | :---: | :---: | :---: | :---: |
 |[snapshot_category](#snapshot_category)|`enum`|:white_check_mark:||Snapshot Category|
 |[kv](#kv)|`number`|:white_check_mark:||Voltage Level|
-|[num_phase](#num_phase)|`number`|:white_check_mark:||Numberf of Phase|
+|[num_phase](#num_phase)|`number`|:white_check_mark:||Number of Phase|
 |[avg_voltage_pu](#avg_voltage_pu)|`number`|:white_check_mark:||Average PU Voltage|
 |[min_voltage_pu](#min_voltage_pu)|`number`|:white_check_mark:||Minimum PU Voltage|
 |[max_voltage_pu](#max_voltage_pu)|`number`|:white_check_mark:||Maximum PU Voltage|

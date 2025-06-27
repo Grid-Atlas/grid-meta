@@ -1,0 +1,50 @@
+name: Lint and Spell Check Markdown Docs
+
+on:
+  pull_request:
+    paths:
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - 'docs/**'
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  lint-markdown:
+    name: Markdown Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run markdownlint
+        uses: DavidAnson/markdownlint-cli2-action@v13
+        with:
+          globs: |
+            README.md
+            CHANGELOG.md
+            docs/**/*.md
+            !docs/schemas/**/*.md
+          config: .markdownlint.yaml
+
+  spell-check:
+    name: Spell Check Markdown and Python
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run cSpell on Markdown and Python
+        uses: streetsidesoftware/cspell-action@v6
+        with:
+          files: |
+            docs/**/*.md
+            src/**/*.py
+            README.md
+            CHANGELOG.md
+          config: .cspell.json

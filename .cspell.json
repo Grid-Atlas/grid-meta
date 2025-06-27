@@ -1,0 +1,46 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "dictionaries": ["en_US", "python", "softwareTerms"],
+  "ignorePaths": [
+    "**/__pycache__/**",
+    "**/*.egg-info/**",
+    "docs/doc.py",
+    "docs/schemas/**"
+  ],
+  "words": [
+    "mkdocs",
+    "OpenDSS",
+    "feeder",
+    "CLI",
+    "SMARTDS",
+    "NREL",
+    "OEDI",
+    "Battelle",
+    "opendssdirect",
+    "conint",
+    "confloat",
+    "ampacity",
+    "vmag",
+    "regcontrols",
+    "energymeter",
+    "vsources",
+    "powerflow",
+    "gridmeta",
+    "kvar",
+    "vmags",
+    "datamodel",
+    "codegen",
+    "cust"
+  ],
+  "overrides": [
+    {
+      "filename": "**/*.py",
+      "languageId": "python"
+    },
+    {
+      "filename": "**/*.md",
+      "languageId": "markdown"
+    }
+  ]
+}

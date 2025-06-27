@@ -158,6 +158,6 @@ def apply_differential_privacy(data: dict, privacy_mode: Literal["low", "moderat
 
     for item in privacy_setting:
         key_paths = item.path.split("/")
-        star_grps = split_by_star(key_paths)
-        update_data_recursively(star_grps, data, item)
+        star_groups = split_by_star(key_paths)
+        update_data_recursively(star_groups, data, item)
     return data

@@ -14,7 +14,7 @@ Additional Properties Allowed: `True`
 |[state](#state)|`unknown`|:white_check_mark:||List U.S state to which model belongs to.|
 |[created_at](#created_at)|`string`|:white_check_mark:|`date-time`|Created Datetime|
 |[model_year](#model_year)|`integer`|:white_check_mark:||Model Year|
-|[info](#info)|`string`|:white_check_mark:||Metdata Info|
+|[info](#info)|`string`|:white_check_mark:||Metadata Info|
 |[region_type](#region_type)|`enum`|:white_check_mark:||Feeder Category|
 
 ## state

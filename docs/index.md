@@ -55,7 +55,6 @@ pip install -e .
 
 ✅ This will also install all required dependencies.
 
-
 ## 🛠 Example CLI Usage
 
 You can currently use this package as CLI tool. To see the available commands please use following command.

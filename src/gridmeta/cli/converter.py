@@ -3,8 +3,8 @@ import datetime
 
 import click
 
-from gridmeta.opendss import OpenDSSMetdataExtractorV1
-from gridmeta.models import Metadata, RegionType
+from gridmeta.opendss import OpenDSSMetadataExtractorV1
+from gridmeta.models import Metadata, FeederCategory
 
 
 @click.command()
@@ -31,8 +31,8 @@ from gridmeta.models import Metadata, RegionType
 @click.option(
     "-r",
     "--region-type",
-    type=click.Choice([m.value for m in RegionType]),
-    default=RegionType.Suburban.value,
+    type=click.Choice([m.value for m in FeederCategory]),
+    default=FeederCategory.Suburban.value,
     help="Region type",
 )
 @click.option("-d", "--description", type=str, default="", help="Provide some description.")
@@ -48,7 +48,7 @@ def extract_opendss_dehydrated_dataset(
     region_type: str,
     description: str,
 ):
-    extractor = OpenDSSMetdataExtractorV1(
+    extractor = OpenDSSMetadataExtractorV1(
         Path(opendss_file),
         metadata=Metadata(
             state=state,

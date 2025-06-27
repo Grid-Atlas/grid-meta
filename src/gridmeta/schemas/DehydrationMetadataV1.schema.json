@@ -30,7 +30,7 @@
                     "pattern": "^(19|20|21)\\d{2}$"
                 },
                 "info": {
-                    "title": "Metdata Info",
+                    "title": "Metadata Info",
                     "description": "Any description you would like to add.",
                     "type": "string"
                 },
@@ -133,24 +133,24 @@
                             "min_pct_peak_loading": {
                                 "type": "number",
                                 "title": "Minimum Percentage Peak Loading",
-                                "description": "Minimum percenatge loading of these type of transformers during peak load.",
+                                "description": "Minimum percentage loading of these type of transformers during peak load.",
                                 "minimum": 0
                             },
                             "avg_pct_peak_loading": {
                                 "type": "number",
                                 "title": "Average Percentage Peak Loading",
-                                "description": "Average percenatge loading of these type of transformers during peak load.",
+                                "description": "Average percentage loading of these type of transformers during peak load.",
                                 "minimum": 0
                             },
                             "max_pct_peak_loading": {
                                 "type": "number",
                                 "title": "Maximum Percentage Peak Loading",
-                                "description": "Maximum percenatge loading of these type of transformers during peak load.",
+                                "description": "Maximum percentage loading of these type of transformers during peak load.",
                                 "minimum": 0
                             },
                             "std_pct_peak_loading": {
                                 "title": "Standard Deviation Percentage Peak Loading",
-                                "description": "Standard deviation percenatge loading of these type of transformers during peak load.",
+                                "description": "Standard deviation percentage loading of these type of transformers during peak load.",
                                 "oneOf": [
                                     {"type": "number"},
                                     {"type": "string"}
@@ -212,7 +212,7 @@
                             },
                             "min_feeder_miles": {
                                 "type": "number",
-                                "title": "Mimumum Feeder Miles",
+                                "title": "Minimum Feeder Miles",
                                 "description": "Minimum feeder section length in miles.",
                                 "minimum": 0
                             },
@@ -331,24 +331,24 @@
                             "min_pct_peak_loading": {
                                 "type": "number",
                                 "title": "Minimum Percentage Peak Loading",
-                                "description": "Minimum percenatge loading of these type of feeder sections during peak load.",
+                                "description": "Minimum percentage loading of these type of feeder sections during peak load.",
                                 "minimum": 0
                             },
                             "avg_pct_peak_loading": {
                                 "type": "number",
                                 "title": "Average Percentage Peak Loading",
-                                "description": "Average percenatge loading of these type of feeder sections during peak load.",
+                                "description": "Average percentage loading of these type of feeder sections during peak load.",
                                 "minimum": 0
                             },
                             "max_pct_peak_loading": {
                                 "type": "number",
                                 "title": "Maximum Percentage Peak Loading",
-                                "description": "Maximum percenatge loading of these type of feeder sections during peak load.",
+                                "description": "Maximum percentage loading of these type of feeder sections during peak load.",
                                 "minimum": 0
                             },
                             "std_pct_peak_loading": {
                                 "title": "Standard Deviation Percentage Peak Loading",
-                                "description": "Standard deviation percenatge loading of these type of feeder sections during peak load.",
+                                "description": "Standard deviation percentage loading of these type of feeder sections during peak load.",
                                 "oneOf": [
                                     {"type": "number"},
                                     {"type": "string"}
@@ -661,7 +661,7 @@
                         "type": "number",
                         "minimum": 1,
                         "maximum": 3,
-                        "title": "Numberf of Phase",
+                        "title": "Number of Phase",
                         "description": "Number of phase."
                     },
                     "avg_voltage_pu": {
