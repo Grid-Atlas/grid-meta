@@ -36,7 +36,8 @@ dev = [
   "pre-commit~=4.2.0", 
   "pytest~=8.4.0", 
   "ruff~=0.11.12",
-  "pytest-mock~=3.14.1"
+  "pytest-mock~=3.14.1",
+  "pytest-cov~=6.2.1"
 ]
 doc = [
   "mkdocs-material~=9.6.14",
