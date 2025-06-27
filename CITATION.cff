@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+title: Grid Meta
+message: 'If you use this software, please cite it as below.'
+type: software
+authors:
+  - family-names: Duwadi
+    given-names: Kapil
+  - family-names: Bhattacharjee
+    given-names: Kaustav
+  - family-names: Anderson
+    given-names: Alexander
+  - family-names: Sadnam
+    given-names: Rabayet
+repository-code: 'https://github.com/Grid-Atlas/grid-meta'
+url: 'https://grid-atlas.github.io/grid-meta'
+abstract: >-
+  A light weight Python Package for extracting metadata from OpenDSS model.
+
+keywords:
+  - python
+  - altdss
+  - pydantic
+  - opendss
+license: BSD-3-Clause
+version: v1.0.0
+funding:
+  - name: U.S. Department of Energy's Office of Electricity
+    url: 'https://www.energy.gov/oe/office-electricity'
+    contract-number: 'DE-AC05-76RL01830'
+date-released: 2025-07-01
