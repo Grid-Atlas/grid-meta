@@ -4,10 +4,15 @@ on:
   push:
     branches:
       - '**'
+    paths:
+      - src/**
+      - tests/**
   pull_request:
     branches:
       - '**'
-
+    paths:
+      - src/**
+      - tests/**
 jobs:
   test_and_lint:
     runs-on: ubuntu-latest
