@@ -1,7 +1,7 @@
 # Getting Started with `grid-meta`
 
 [![Build](https://github.com/Grid-Atlas/grid-meta/actions/workflows/ci.yml/badge.svg)](https://github.com/Grid-Atlas/grid-meta/actions/workflows/ci.yml)
-![Python](https://img.shields.io/pypi/pyversions/grid-meta)
+![Python](https://img.shields.io/pypi/pyversions/gridmeta)
 ![License](https://img.shields.io/github/license/Grid-Atlas/grid-meta)
 ![Coverage](https://img.shields.io/codecov/c/github/Grid-Atlas/grid-meta)
 
@@ -10,20 +10,7 @@
 Welcome! Follow the steps below to get `grid-meta` up and running locally.  
 We recommend using a Python virtual environment for a clean install 🔒🐍.
 
-> 💡 **Note:** In the future, `grid-meta` may be installable directly via `pip install gridmeta`. For now, follow the instructions below.
-
----
-
-## 📦 Step 1: Clone the Repository
-
-First, download the codebase to your machine:
-
-```bash
-git clone https://github.com/Grid-Atlas/grid-meta.git
-cd grid-meta
-```
-
-## 🧪 Step 2: Set Up a Python Environment
+## 🧪 Step 1: Set Up a Python Environment
 
 To avoid dependency conflicts, create and activate a virtual environment.
 
@@ -45,12 +32,12 @@ conda activate grid-reducer-env
 
 </details>
 
-## 🚀 Step 3: Install the Project Locally
+## 🚀 Step 2: Install the Project Locally
 
-Install the project in editable mode so changes to the code reflect immediately:
+Install the project.
 
 ```bash
-pip install -e .
+pip install gridmeta
 ```
 
 ✅ This will also install all required dependencies.
