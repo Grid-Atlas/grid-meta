@@ -35,8 +35,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [1.0.0-draft] - 2025-06-02
+## [1.0.0] - 2025-06-02
 
 ### Added
 
-* Migrated code from gitlab to github.
+* Released a first open source version of GridMeta.
+* Supports creating dehydrated metadata from given OpenDSS model.
