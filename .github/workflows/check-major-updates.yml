@@ -1,0 +1,42 @@
+name: Check for Major Dependency Updates
+
+on:
+  schedule:
+    - cron: '0 0 * * 5'  # Every Friday at midnight UTC
+  workflow_dispatch:     # Allows manual triggering
+
+jobs:
+  check-deps:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      issues: write  # Needed to create issues
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install pip-tools
+        run: |
+          pip install -e.[dev,doc]
+          pip install pip-tools tomli requests packaging
+
+      - name: Check for Major Version Updates
+        id: check_versions
+        run: |
+          python .github/scripts/check_major_versions.py
+          echo "HAS_MAJOR_UPDATES=$(test -s major_updates.txt && echo true || echo false)" >> $GITHUB_ENV
+
+      - name: Create Issue if Major Updates Found
+        if: env.HAS_MAJOR_UPDATES == 'true'
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: "🔔 New Major Version Available for Dependencies"
+          content-filepath: major_updates.txt
+          labels: dependencies, automation
