@@ -75,9 +75,9 @@ docstring-code-format = true
 docstring-code-line-length = "dynamic"
 
 [project.urls]
-Documentation = "https://github.com/grid-atlas/gridmeta"
-Issues = "https://github.com/grid-atlas/gridmeta/issues"
-Source = "https://github.com/grid-atlas/gridmeta"
+Documentation = "https://github.com/grid-atlas/grid-meta"
+Issues = "https://github.com/grid-atlas/grid-meta/issues"
+Source = "https://github.com/grid-atlas/grid-meta"
 
 [tool.hatch.version]
 path = "src/gridmeta/version.py"
