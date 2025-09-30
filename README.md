@@ -10,6 +10,8 @@
 Welcome! Follow the steps below to get `grid-meta` up and running locally.  
 We recommend using a Python virtual environment for a clean install 🔒🐍.
 
+This software is being provided as a prototype only. For your intended use, it is your responsibility to independently validate the results in accordance with your applicable software quality assurance program.
+
 ## 🧪 Step 1: Set Up a Python Environment
 
 To avoid dependency conflicts, create and activate a virtual environment.
